@@ -23,13 +23,13 @@ class MainActivity : AppCompatActivity() {
         translatorButton = findViewById<Button>(R.id.button)      // Click CTRL and hover over editText to see it in XML
         outputMessage = findViewById<TextView>(R.id.textView5)
 
-        textView?.text = ""
-        textView?.movementMethod = ScrollingMovementMethod()
+        outputMessage?.text = ""
+        outputMessage?.movementMethod = ScrollingMovementMethod()
 
-        button?.setOnClickListener(object : View.OnClickListener {
+        translatorButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 numTimesClicked += 1
-                textView?.append("Opening translator . . . :)")
+                outputMessage?.append("Opening translator . . . :)")
 
 
             }
