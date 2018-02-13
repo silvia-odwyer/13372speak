@@ -1,4 +1,4 @@
-package com.silviaodwyer.leet_speak_translator
+package com.silviaodwyer.leetspeaktranslator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.silviaodwyer.leetspeaktranslator.R
 
 class MainActivity : AppCompatActivity() {
     private var outputMessage: TextView? = null
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun convertToLeetSpeak(messageToBeTranslated: String): String {
-            var messageToBeTranslated: String = messageToBeTranslated.toLowerCase()
             var outputMessage: String = ""
             val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',')
             val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',')
@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
         translateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 // Contents in the editText are saved in a variable
@@ -83,7 +82,8 @@ class MainActivity : AppCompatActivity() {
                 outputMessage?.movementMethod = ScrollingMovementMethod()
                 outputMessage?.text = ""
 
-                val stringOfMessage: String = messageToBeTranslated.toString()
+                var stringOfMessage: String = messageToBeTranslated.toString()
+                stringOfMessage = stringOfMessage.toLowerCase()
 
                 outputMessage?.append("Your entered message is: $messageToBeTranslated")
 
@@ -100,7 +100,8 @@ class MainActivity : AppCompatActivity() {
                 outputMessage?.movementMethod = ScrollingMovementMethod()
                 outputMessage?.text = ""
 
-                val stringOfMessage: String = messageToBeTranslated.toString()
+                var stringOfMessage: String = messageToBeTranslated.toString()
+                stringOfMessage = stringOfMessage.toLowerCase()
 
                 outputMessage?.append("Your entered message is: $messageToBeTranslated")
                 var leetTranslation: String = advConvertToLeetSpeak(stringOfMessage, alphabetArray)
