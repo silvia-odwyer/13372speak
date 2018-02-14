@@ -47,10 +47,31 @@ class MainActivity : AppCompatActivity() {
 
         fun convertToLeetSpeak(messageToBeTranslated: String): String {
             var outputMessage: String = ""
-            val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',')
-            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',')
+            val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+            var condition: Int = 1
+            val leetWordList: List<String> = listOf("1337", "1337", "h4xor", "n00b", "pwn", "j00", "kewl", "roxx0rs", "w00t", "w00t", "d00d")
+            val englishWordList: List<String> = listOf("leet", "elite", "hacker", "newbie", "own", "you", "cool", "rocks", "woo", "yay", "dude")
+            var leetSentenceb4Conversion: String = ""
+            var splitString = messageToBeTranslated.split(" ")
+            for (word1 in splitString){
+                for (word2 in englishWordList){
+                    if (word1 == word2) {
+                        var wordIndex: Int = englishWordList.indexOf(word1)
+                        var leetWord: String = leetWordList[wordIndex]
+                        leetSentenceb4Conversion += (" $leetWord")
+                        condition = 0
+
+                    }
+                }
+                if (condition == 1){
+                    leetSentenceb4Conversion += (" $word1")
+                }
+            }
+
+
             val messageArray = CharArray(10000)
-            var listOfMessage = messageToBeTranslated.toList()
+            var listOfMessage = leetSentenceb4Conversion.toList()
 
 //            for (letter in messageToBeTranslated) {
 //                messageArray.set(index, letter)
