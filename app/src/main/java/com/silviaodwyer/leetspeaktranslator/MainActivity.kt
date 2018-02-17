@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var advTranslateButton: Button? = null
 
     var messageToBeTranslated: String = ""
-    val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',')
+    val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
             var messageTobeTranslated: String = messageToBeTranslated.toLowerCase()
             var outputMessage: String = ""
-            val leetArray: Array<Any> = arrayOf("4", "8", "(", "|)", '3', "|=", "9", "|-|", "!", "_|", 'X', "1", "|\\//|", "|V", "0", "|*", "(_,)", "2", "5", "7", "(_)", "\\//", "\\//\\//", "><", "7", "2", ' ', '.', ',')
+            val leetArray: Array<Any> = arrayOf("4", "8", "(", "|)", '3', "|=", "9", "|-|", "!", "_|", 'X', "1", "|\\//|", "|V", "0", "|*", "(_,)", "2", "5", "7", "(_)", "\\//", "\\//\\//", "><", "7", "2", ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
             var listOfMessage = messageToBeTranslated.toList()
 
             for (letter in listOfMessage) {
@@ -51,10 +51,9 @@ class MainActivity : AppCompatActivity() {
             return outputMessage
         }
 
-        fun convertToLeetSpeak(messageToBeTranslated: String): String {
+        fun convertToLeetSpeak(messageToBeTranslated: String, alphabetArray: Array<Any>): String {
             var outputMessage: String = ""
-            val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
-            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
             var condition: Int = 1
             val leetWordList: List<String> = listOf("1337", "1337", "h4xor", "n00b", "pwn", "j00", "kewl", "roxx0rs", "w00t", "w00t", "d00d")
             val englishWordList: List<String> = listOf("leet", "elite", "hacker", "newbie", "own", "you", "cool", "rocks", "woo", "yay", "dude")
@@ -91,6 +90,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        fun copyToClipboard(leetTranslation: String){
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("leetMessage", "$leetTranslation")
+            clipboard!!.setPrimaryClip(clip)
+        }
+
         translateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 // Contents in the editText are saved in a variable
@@ -102,12 +107,10 @@ class MainActivity : AppCompatActivity() {
                 var stringOfMessage: String = messageToBeTranslated.toString()
                 stringOfMessage = stringOfMessage.toLowerCase()
 
-                var leetTranslation: String = convertToLeetSpeak(stringOfMessage)
+                var leetTranslation: String = convertToLeetSpeak(stringOfMessage, alphabetArray)
 
+                var clipboardMessage = copyToClipboard(leetTranslation)
                 outputMessage?.setText("$leetTranslation")
-                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip = ClipData.newPlainText("leetMessage", "$leetTranslation")
-                clipboard!!.setPrimaryClip(clip)
 
 
                 // Check if no view has focus:
@@ -118,7 +121,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
 
         advTranslateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
@@ -132,6 +134,8 @@ class MainActivity : AppCompatActivity() {
                 var leetTranslation: String = advConvertToLeetSpeak(stringOfMessage, alphabetArray)
 
                 outputMessage?.setText("$leetTranslation")
+
+                var clipboardMessage = copyToClipboard(leetTranslation)
 
                 val view: View = getCurrentFocus()
                 if (view != null) {
