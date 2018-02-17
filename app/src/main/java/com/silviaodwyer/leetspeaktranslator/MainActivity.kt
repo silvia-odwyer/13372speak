@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
             for (letter in listOfMessage) {
                 var index_number = alphabetArray.indexOf(letter)
-                println("$letter $index_number")
                 var leetElement = leetArray[index_number]
                 outputMessage += leetElement
             }
@@ -55,13 +54,13 @@ class MainActivity : AppCompatActivity() {
             var leetSentenceb4Conversion: String = ""
             var splitString = messageToBeTranslated.split(" ")
             for (word1 in splitString){
+                condition = 1
                 for (word2 in englishWordList){
                     if (word1 == word2) {
                         var wordIndex: Int = englishWordList.indexOf(word1)
                         var leetWord: String = leetWordList[wordIndex]
                         leetSentenceb4Conversion += (" $leetWord")
                         condition = 0
-
                     }
                 }
                 if (condition == 1){
@@ -69,17 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
-            val messageArray = CharArray(10000)
             var listOfMessage = leetSentenceb4Conversion.toList()
-
-//            for (letter in messageToBeTranslated) {
-//                messageArray.set(index, letter)
-//                listOfMessage += letter
-//                index += 1
-//                //println("$index $letter")
-//            }
-
 
             for (letter in listOfMessage) {
                 var index_number = alphabetArray.indexOf(letter)
@@ -113,7 +102,6 @@ class MainActivity : AppCompatActivity() {
                 outputMessage?.append("\nYour 1337 message is: $leetTranslation")
             }
         })
-
 
         advTranslateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {

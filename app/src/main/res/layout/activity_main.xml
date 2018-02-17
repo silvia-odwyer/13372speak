@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.silviaodwyer.leetspeaktranslator.MainActivity">
+    tools:context="com.silviaodwyer.leetspeaktranslator.MainActivity"
+    android:background="@color/darknavy">
 
     <Button
         android:id="@+id/translateButton"
@@ -14,10 +15,13 @@
         android:layout_marginTop="8dp"
         android:text="Translate"
         android:textSize="18sp"
+        android:textColor="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userInput" />
+        app:layout_constraintTop_toBottomOf="@+id/userInput"
+        android:fontFamily="@font/titilliumregular"
+        android:background="@drawable/border"/>
 
     <TextView
         android:id="@+id/outputMessage"
@@ -28,12 +32,14 @@
         android:scrollbars="vertical"
         android:text="Your 1337 message will go here"
         android:textSize="18sp"
+        android:textColor="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/translateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/translateButton"
+        android:fontFamily="@font/titilliumregular"/>
 
     <EditText
         android:id="@+id/userInput"
@@ -43,9 +49,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Enter message"
+        android:textColor="@color/scifiblue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/titilliumregular"/>
 
     <Button
         android:id="@+id/advTranslateButton"
@@ -55,8 +63,11 @@
         android:layout_marginTop="8dp"
         android:text="Advanced Translate"
         android:textSize="18sp"
+        android:textColor="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/outputMessage"
         app:layout_constraintTop_toBottomOf="@+id/userInput"
-        tools:layout_editor_absoluteX="60dp" />
+        tools:layout_editor_absoluteX="60dp"
+        android:background="@drawable/border"
+        android:fontFamily="@font/titilliumregular"/>
 
 </android.support.constraint.ConstraintLayout>
