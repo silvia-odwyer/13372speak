@@ -1,5 +1,6 @@
 package com.silviaodwyer.leetspeaktranslator
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
@@ -9,6 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.silviaodwyer.leetspeaktranslator.R
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.text.Editable
+import android.view.inputmethod.InputMethodManager
+import android.content.ClipData
+import android.content.ClipboardManager
+
 
 class MainActivity : AppCompatActivity() {
     private var outputMessage: TextView? = null
@@ -89,19 +96,29 @@ class MainActivity : AppCompatActivity() {
                 // Contents in the editText are saved in a variable
                 //Log.d(TAG, "OnClick: called")
                 val messageToBeTranslated = userInput?.text
-                outputMessage?.movementMethod = ScrollingMovementMethod()
+                //outputMessage?.movementMethod = ScrollingMovementMethod()
                 outputMessage?.text = ""
 
                 var stringOfMessage: String = messageToBeTranslated.toString()
                 stringOfMessage = stringOfMessage.toLowerCase()
 
-                outputMessage?.append("Your entered message is: $messageToBeTranslated")
-
                 var leetTranslation: String = convertToLeetSpeak(stringOfMessage)
 
-                outputMessage?.append("\nYour 1337 message is: $leetTranslation")
+                outputMessage?.setText("$leetTranslation")
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("leetMessage", "$leetTranslation")
+                clipboard!!.setPrimaryClip(clip)
+
+
+                // Check if no view has focus:
+                val view: View = getCurrentFocus()
+                if (view != null) {
+                    val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
+                }
             }
         })
+
 
         advTranslateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
@@ -112,10 +129,15 @@ class MainActivity : AppCompatActivity() {
                 var stringOfMessage: String = messageToBeTranslated.toString()
                 stringOfMessage = stringOfMessage.toLowerCase()
 
-                outputMessage?.append("Your entered message is: $messageToBeTranslated")
                 var leetTranslation: String = advConvertToLeetSpeak(stringOfMessage, alphabetArray)
 
-                outputMessage?.append("\n Your 1337 message is: $leetTranslation")
+                outputMessage?.setText("$leetTranslation")
+
+                val view: View = getCurrentFocus()
+                if (view != null) {
+                    val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
+                }
             }
 
         })
