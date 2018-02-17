@@ -16,7 +16,13 @@ import android.view.inputmethod.InputMethodManager
 import android.content.ClipData
 import android.content.ClipboardManager
 
+/**
+ * Created by Silvia O'Dwyer on 08/02/2018.
+ * Still a work-in-progress
+ * All comments welcome :)
+ */
 
+private val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private var outputMessage: TextView? = null
     private var translateButton: Button? = null
@@ -38,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             var messageTobeTranslated: String = messageToBeTranslated.toLowerCase()
             var outputMessage: String = ""
-            val leetArray: Array<Any> = arrayOf("4", "8", "(", "|)", '3', "|=", "9", "|-|", "!", "_|", 'X', "1", "|\\//|", "|V", "0", "|*", "(_,)", "2", "5", "7", "(_)", "\\//", "\\//\\//", "><", "7", "2", ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+            val leetArray: Array<Any> = arrayOf("4", "8", "(", "|)", '3', "|=", "9", "|-|", "!", "_|", 'X', "1", "|\\//|", "|V", "0", "|*", "(_,)", "2", "5", "7", "(_)", "\\//", "\\//\\//", "><", "7", "2", ' ', '.', ',', "'", "''", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
             var listOfMessage = messageToBeTranslated.toList()
 
             for (letter in listOfMessage) {
@@ -53,10 +59,10 @@ class MainActivity : AppCompatActivity() {
 
         fun convertToLeetSpeak(messageToBeTranslated: String, alphabetArray: Array<Any>): String {
             var outputMessage: String = ""
-            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+            val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", "''", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
             var condition: Int = 1
-            val leetWordList: List<String> = listOf("1337", "1337", "h4xor", "n00b", "pwn", "j00", "kewl", "roxx0rs", "w00t", "w00t", "d00d")
-            val englishWordList: List<String> = listOf("leet", "elite", "hacker", "newbie", "own", "you", "cool", "rocks", "woo", "yay", "dude")
+            val leetWordList: List<String> = listOf("1337", "1337", "h4xor", "pwn", "j00", "kewl", "roxx0rs", "w00t", "w00t", "d00d")
+            val englishWordList: List<String> = listOf("leet", "elite", "hacker", "own", "you", "cool", "rocks", "woo", "yay", "dude")
             var leetSentenceb4Conversion: String = ""
             var splitString = messageToBeTranslated.split(" ")
             for (word1 in splitString){
@@ -151,5 +157,47 @@ class MainActivity : AppCompatActivity() {
                 userInput?.setText("")
             }
         })
+
+    }
+
+    // Methods used for debugging purposes and outputing to the console
+    override fun onStart() { // Tip for anyone reading this code (HI!): To get access to these auto-generated methods, just press CTRL + O and select your method.
+        Log.d(TAG, "OnStart: called")
+        super.onStart()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        Log.d(TAG, "OnRestoreInstanceState: called")
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onRestart() {
+        Log.d(TAG, "OnRestart: called")
+        super.onRestart()
+    }
+
+    override fun onResume() {
+        Log.d(TAG, "OnResume: called")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d(TAG, "OnPause: called")
+        super.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        Log.d(TAG, "OnSaveInstanceState called")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        Log.d(TAG, "OnStop: called")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "OnDestroy: called")
+        super.onDestroy()
     }
 }
