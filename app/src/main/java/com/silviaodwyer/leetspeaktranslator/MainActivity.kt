@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         userInput = findViewById(R.id.userInput)
-        translateButton = findViewById(R.id.translateButton)
         outputMessage = findViewById(R.id.outputMessage)
         advTranslateButton = findViewById(R.id.advTranslateButton)
 
