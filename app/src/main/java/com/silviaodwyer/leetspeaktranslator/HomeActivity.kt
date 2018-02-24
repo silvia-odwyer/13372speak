@@ -13,9 +13,9 @@ class HomeActivity : AppCompatActivity() {
 
         openTranslatorButton = findViewById(R.id.openTranslatorButton)
 
-        openTranslatorButton?.setOnClickListener {
-            var intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        openTranslatorButton?.setOnClickListener {
+//            var intent = Intent(context, MainActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

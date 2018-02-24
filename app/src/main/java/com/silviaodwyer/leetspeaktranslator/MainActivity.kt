@@ -18,7 +18,9 @@ import android.content.ClipboardManager
 
 /**
  * Created by Silvia O'Dwyer on 08/02/2018.
- * Still a work-in-progress
+ * Still a work-in-progress.
+ * The functions used here may form the basis for another, more advanced app,
+ * an app where strings can be converted to a variety of alphabets, etc.,
  * All comments welcome :)
  */
 
@@ -37,11 +39,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         userInput = findViewById(R.id.userInput)
         outputMessage = findViewById(R.id.outputMessage)
+        translateButton = findViewById(R.id.translateButton)
         advTranslateButton = findViewById(R.id.advTranslateButton)
 
         fun advConvertToLeetSpeak(messageToBeTranslated: String, alphabetArray: Array<Any>): String {
 
-            var messageTobeTranslated: String = messageToBeTranslated.toLowerCase()
+            var messageToBeTranslated: String = messageToBeTranslated.toLowerCase()
             var outputMessage: String = ""
             val leetArray: Array<Any> = arrayOf("4", "8", "(", "|)", '3', "|=", "9", "|-|", "!", "_|", 'X', "1", "|\\//|", "|V", "0", "|*", "(_,)", "2", "5", "7", "(_)", "\\//", "\\//\\//", "><", "7", "2", ' ', '.', ',', "'", "''", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
             var listOfMessage = messageToBeTranslated.toList()
@@ -56,42 +59,66 @@ class MainActivity : AppCompatActivity() {
             return outputMessage
         }
 
+        fun specialWordConvert(word : String, leetWordList : List<String>, englishWordList : List<String>) : String {
+            var translatedWord = ""
+            for (word1 in englishWordList) {
+                if (word1 == word){
+                    var wordIndex: Int = englishWordList.indexOf(word1)
+                    var leetWord: String = leetWordList[wordIndex]
+                    translatedWord += leetWord
+                    //println("$translatedWord")
+                }
+            }
+            return translatedWord
+        }
+
         fun convertToLeetSpeak(messageToBeTranslated: String, alphabetArray: Array<Any>): String {
+
             var outputMessage: String = ""
+            var fullWord: String = ""
             val leetArray: Array<Any> = arrayOf('4', 'b', 'c', 'd', '3', 'f', 'g', 'h', '1', 'j', 'k', 'l', 'm', 'n', '0', 'p', 'q', 'r', '5', '7', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", "''", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
-            var condition: Int = 1
+
             val leetWordList: List<String> = listOf("1337", "1337", "h4xor", "pwn", "j00", "kewl", "roxx0rs", "w00t", "w00t", "d00d")
             val englishWordList: List<String> = listOf("leet", "elite", "hacker", "own", "you", "cool", "rocks", "woo", "yay", "dude")
+
             var leetSentenceb4Conversion: String = ""
             var splitString = messageToBeTranslated.split(" ")
-            for (word1 in splitString){
-                condition = 1
-                for (word2 in englishWordList){
-                    if (word1 == word2) {
-                        var wordIndex: Int = englishWordList.indexOf(word1)
-                        var leetWord: String = leetWordList[wordIndex]
-                        leetSentenceb4Conversion += (" $leetWord")
-                        condition = 0
+
+            //println(splitString)
+            for (word in splitString) {
+                //println("WORD: $word")
+                fullWord = ""
+
+                if (word in englishWordList){
+                    //println("$word is in the English Word List.")
+                    var leetWord = specialWordConvert(word, leetWordList, englishWordList)
+                    leetSentenceb4Conversion += ("$leetWord ")
+
+                }
+
+                else{
+                    //println("$word is not in the English Word List")
+                    var listOfWord = word.toList()
+                    //println("List of the non-Leet word is: $listOfWord")
+                    fullWord = ""
+
+                    for (letter in listOfWord) {
+                        var index_number = alphabetArray.indexOf(letter)
+                        var leetElement = leetArray[index_number]
+                        fullWord += leetElement
                     }
-                }
-                if (condition == 1){
-                    leetSentenceb4Conversion += (" $word1")
+                    //println("FULL WORD: $fullWord")
+                    //fullWord = fullWord.toString()
+                    leetSentenceb4Conversion += ("$fullWord ")
+
                 }
             }
 
-            var listOfMessage = leetSentenceb4Conversion.toList()
+            leetSentenceb4Conversion = leetSentenceb4Conversion.toString()
+            println(leetSentenceb4Conversion)
+            Log.d(TAG, "THE FINAL TRANSLATED MESSAGE IS: $leetSentenceb4Conversion")
 
-            for (letter in listOfMessage) {
-                var index_number = alphabetArray.indexOf(letter)
-                println("$letter $index_number")
-                var leetElement = leetArray[index_number]
-                println("$letter $leetElement")
-                outputMessage += leetElement
-
-            }
-            println(outputMessage)
-            outputMessage = outputMessage.toString()
-            return outputMessage
+            return leetSentenceb4Conversion
 
         }
 
