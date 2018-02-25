@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/translateButton" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/clipboardButton"
         android:layout_width="140dp"
         android:layout_height="73dp"
         android:layout_marginBottom="164dp"

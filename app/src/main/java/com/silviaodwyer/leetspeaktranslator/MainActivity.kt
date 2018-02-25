@@ -15,12 +15,13 @@ import android.text.Editable
 import android.view.inputmethod.InputMethodManager
 import android.content.ClipData
 import android.content.ClipboardManager
+import com.silviaodwyer.leetspeaktranslator.R.id.clipboardButton
 
 /**
  * Created by Silvia O'Dwyer on 08/02/2018.
  * Still a work-in-progress.
  * The functions used here may form the basis for another, more advanced app,
- * an app where strings can be converted to a variety of alphabets, etc.,
+ * where strings can be converted to a variety of alphabets, etc.,
  * All comments welcome :)
  */
 
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var translateButton: Button? = null
     private var userInput: EditText? = null
     private var advTranslateButton: Button? = null
+    private var clipboardButton: Button? = null
 
     var messageToBeTranslated: String = ""
     val alphabetArray: Array<Any> = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '.', ',', "'", '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         outputMessage = findViewById(R.id.outputMessage)
         translateButton = findViewById(R.id.translateButton)
         advTranslateButton = findViewById(R.id.advTranslateButton)
+        clipboardButton = findViewById(R.id.clipboardButton)
 
         fun advConvertToLeetSpeak(messageToBeTranslated: String, alphabetArray: Array<Any>): String {
 
@@ -128,6 +131,8 @@ class MainActivity : AppCompatActivity() {
             clipboard!!.setPrimaryClip(clip)
         }
 
+
+
         translateButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 // Contents in the editText are saved in a variable
@@ -141,10 +146,18 @@ class MainActivity : AppCompatActivity() {
 
                 var leetTranslation: String = convertToLeetSpeak(stringOfMessage, alphabetArray)
 
-                var clipboardMessage = copyToClipboard(leetTranslation)
                 outputMessage?.setText("$leetTranslation")
 
+                // Yes, I nested a setOnClickListener listener inside another one, because
+                // I needed access to the translated message, and having it publically
+                // available wouldn't be the easier option for now. I felt that it would
+                // overall be neater to have the clipboard listener inside.
+                clipboardButton?.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(p0 : View?){
+                        var clipboardMessage = copyToClipboard(leetTranslation)
 
+                    }
+                })
                 // Check if no view has focus:
                 val view: View = getCurrentFocus()
                 if (view != null) {
@@ -167,7 +180,12 @@ class MainActivity : AppCompatActivity() {
 
                 outputMessage?.setText("$leetTranslation")
 
-                var clipboardMessage = copyToClipboard(leetTranslation)
+                clipboardButton?.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(p0 : View?){
+                        var clipboardMessage = copyToClipboard(leetTranslation)
+
+                    }
+                })
 
                 val view: View = getCurrentFocus()
                 if (view != null) {
