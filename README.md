@@ -1,8 +1,16 @@
 # LeetSpeakTranslator
 A Kotlin Android app that converts strings to 1337speak. 
 
+## Screenshots
+Screenshots can explain more than any amount of words :)
+This is the Translator activity, featuring quite a basic dark-themed UI, but this will be edited hugely in the coming weeks.
+![The Translator activity as of 03-02-2018](https://github.com/silvia-odwyer/LeetSpeakTranslator/blob/master/appTranslatorScreenshot.PNG)
+
+Here's the Home activity, which will be displayed upon app launch:
+![The Home activity as of 03-02-2018](https://github.com/silvia-odwyer/LeetSpeakTranslator/blob/master/appHomeScreenshot.PNG)
+
 ## Current State
-As of 17-02-18, this app translates strings to 1337speak, and also include special support
+As of 03-02-18, this app translates strings to 1337speak, and also includes special support
 for reserved words such as "hacker" and "you" where they have their own 1337speak variants
 rather than the defacto standard. 
 
@@ -25,4 +33,3 @@ so that it includes slightly glowing text and more SVGs.
 - The editText for the 1337message doesn't allow for copying and pasting yet.
 
 I hope to complete this app by mid-March 2018, and it may even be sold for free on the Google Play Store.
-(A lot of them exist, so why shouldn't mine be up there I guess . . .)
